@@ -55,6 +55,22 @@
             background-color: #45a049;
         }
     </style>
+<script type="text/javascript">
+    function validateEmail(){
+        
+        var emailField = document.getElementById('correo');
+        
+        var validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+        if( validEmail.test(emailField.value) ){
+            alert('El correo electrónico es válido.');
+            return true;
+        }else{
+            alert('El correo electrónico no es válido.');
+            return false;
+        }
+    }
+</script>
 </head>
 <body>
     <div class="login-container">
@@ -66,7 +82,7 @@
             <label for="contrasena">Contraseña:</label>
             <input type="password" id="contrasena" name="contrasena" required>
 
-            <input type="submit" value="Iniciar sesión">
+            <input type="submit" value="Iniciar sesión" onclick="return validateEmail()" >
         </form>
     </div>
 </body>
