@@ -72,15 +72,15 @@
 
         function validateCont(){
         
-        var ContField = document.getElementById('contrasena');
+        var contField = document.getElementById('contrasena');
         
         var validCont =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
         if( validCont.test(contField.value) ){
-            alert('El correo electrónico es válido.');
+            alert('La contraseña es válida.');
             return true;
         }else{
-            alert('El correo electrónico no es válido.');
+            alert('La contraseña no es válida.');
             return false;
         }
     }
