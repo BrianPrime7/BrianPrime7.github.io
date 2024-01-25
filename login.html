@@ -69,6 +69,20 @@
             alert('El correo electrónico no es válido.');
             return false;
         }
+
+        function validateCont(){
+        
+        var ContField = document.getElementById('contrasena');
+        
+        var validCont =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+        if( validCont.test(contField.value) ){
+            alert('El correo electrónico es válido.');
+            return true;
+        }else{
+            alert('El correo electrónico no es válido.');
+            return false;
+        }
     }
 </script>
 </head>
@@ -82,7 +96,7 @@
             <label for="contrasena">Contraseña:</label>
             <input type="password" id="contrasena" name="contrasena" required>
 
-            <input type="submit" value="Iniciar sesión" onclick="return validateEmail()" >
+            <input type="submit" value="Iniciar sesión" onclick="return validateEmail();validateCont()" >
         </form>
     </div>
 </body>
