@@ -1,5 +1,5 @@
 function validateLogin() {
-    console.log('Función llamada');
+
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,}$/;
 
