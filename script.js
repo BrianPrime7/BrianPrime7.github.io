@@ -6,15 +6,15 @@ function validateLogin() {
     var password = document.getElementById('password').value;
 
     if (!emailRegex.test(email)) {
-        console.error('Ingresa un correo electrónico válido.');
+        alert('Ingresa un correo electrónico válido.');
         return;
     }
 
     if (!passwordRegex.test(password)) {
-        console.error('La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número y una letra.');
+        alert('La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número y una letra.');
         return;
     }
 
-    console.log('Inicio de sesión exitoso!');
-    // Aquí podrías agregar la lógica para enviar los datos al backend y verificar la autenticación.
+    alert('Inicio de sesión exitoso!');
+    // Aquí puedes agregar la lógica para enviar los datos al backend y verificar la autenticación.
 }
