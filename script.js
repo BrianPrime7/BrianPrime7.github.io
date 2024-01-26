@@ -1,4 +1,5 @@
 function validateLogin() {
+    console.log('Función llamada');
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,}$/;
 
@@ -16,5 +17,4 @@ function validateLogin() {
     }
 
     console.log('Inicio de sesión exitoso!');
-    // Aquí podrías agregar la lógica para enviar los datos al backend y verificar la autenticación.
 }
