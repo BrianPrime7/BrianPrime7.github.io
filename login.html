@@ -1,81 +1,58 @@
 <!DOCTYPE html>
-<html lang=”es”>
+<html lang="es">
 <head>
- <meta charset=”UTF-8”>
- <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Formulario de Inicio de Sesión</title>
  <style>
- Body {
- Font-family: ‘Segoe UI’, Tahoma, Geneva, Verdana, sans-serif;
- Background-color: #f4f4f4;
- Margin: 0;
- Padding: 0;
- Display: flex;
- Justify-content: center;
- Align-items: center;
- Height: 100vh;
+ body {
+ font-family: Arial, sans-serif;
  }
- Form {
- Background-color: #fff;
- Border-radius: 8px;
- Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- Padding: 20px;
- Max-width: 300px;
- Width: 100%;
+ form {
+ max-width: 300px;
+ margin: 50px auto;
  }
- Label {
- Font-size: 14px;
- Margin-bottom: 6px;
- Display: block;
+ input {
+ width: 100%;
+ padding: 8px;
+ margin: 5px 0;
+ box-sizing: border-box;
  }
- Input {
- Width: 100%;
- Padding: 10px;
- Margin-bottom: 15px;
- Border: 1px solid #ccc;
- Border-radius: 4px;
- Box-sizing: border-box;
- }
- Button {
- Background-color: #4CAF50;
- Color: white;
- Padding: 10px 15px;
- Border: none;
- Border-radius: 4px;
- Cursor: pointer;
- Width: 100%;
- Font-size: 16px;
- }
- Button:hover {
- Background-color: #45ª049;
+ button {
+ background-color: #4CAF50;
+ color: white;
+ padding: 10px 15px;
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
  }
  </style>
 </head>
 <body>
- <form id=”loginForm” onsubmit=”validateForm(); return false;”>
- <label for=”email”>Correo electrónico:</label>
- <input type=”text” id=”email” placeholder=correo@ejemplo.com required>
- <label for=”password”>Contraseña:</label>
- <input type=”password” id=”password” placeholder=”Contraseña” required>
- <button type=”submit”>Iniciar Sesión</button>
+ <form id="loginForm" onsubmit="validateForm(); return false;">
+ <label for="email">Correo electrónico:</label>
+ <input type="text" id="email" placeholder="correo@ejemplo.com" required>
+ <label for="password">Contraseña:</label>
+ <input type="password" id="password" placeholder="Contraseña" required>
+ <button type="submit">Iniciar Sesión</button>
  </form>
  <script>
- Function validateForm() {
- Var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
- Var passwordRegex = /^(¿=.*\d)(¿=.*[a-z])(¿=.*[A-Z]).{8,}$/;
- Var email = document.getElementById(‘email’).value;
- Var password = document.getElementById(‘password’).value;
- If (¡emailRegex.test(email)) {
- Alert(‘Por favor, ingrese un correo electrónico válido.’);
- Return;
+ function validateForm() {
+ var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+ var email = document.getElementById('email').value;
+ var password = document.getElementById('password').value;
+ if (!emailRegex.test(email)) {
+ alert('Por favor, ingrese un correo electrónico válido.');
+ return;
  }
- If (¡passwordRegex.test(password)) {
- Alert(‘La contraseña debe contener al menos 8 caracteres, incluyendo al menos un
-número, una letra minúscula y una letra mayúscula.’);
- Return;
+ if (!passwordRegex.test(password)) {
+ alert('La contraseña debe contener al menos 8 caracteres, incluyendo al menos un
+número, una letra minúscula y una letra mayúscula.');
+ return;
  }
  // Si las validaciones pasan, puedes enviar el formulario o realizar otras acciones aquí.
- Alert(‘Inicio de sesión exitoso.’);
+ alert('Inicio de sesión exitoso.');
  }
  </script>
 </body>
