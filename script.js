@@ -1,4 +1,4 @@
-function validateLogin() {
+async function validateLogin() {
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,}$/;
 
@@ -15,6 +15,25 @@ function validateLogin() {
         return;
     }
 
-    alert('Inicio de sesión exitoso!');
-    // Aquí puedes agregar la lógica para enviar los datos al backend y verificar la autenticación.
+    // Enviar datos al backend
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert('Inicio de sesión exitoso!');
+        } else {
+            alert('Error en el inicio de sesión. Verifica tus credenciales.');
+        }
+    } catch (error) {
+        console.error('Error al enviar datos al backend:', error);
+        alert('Ocurrió un error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
+    }
 }
