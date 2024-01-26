@@ -16,5 +16,5 @@ function validateLogin() {
     }
 
     alert('Inicio de sesión exitoso!');
-    // Aquí puedes agregar la lógica para enviar los datos al backend y verificar la autenticación.
+    
 }
