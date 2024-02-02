@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap and Rick and Morty API Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Establece la configuración inicial de la página, incluyendo Bootstrap para mejorar el diseño. -->
+  <style>
+    /* Estilos personalizados para mejorar el diseño. */
+    .character-card {
+      margin-top: 20px;
+    }
+
+    .card {
+      width: 15px;
+    }
+
+    #character-list-container {
+      max-height: 500px;
+      overflow-y: auto; <!-- Le da diseño a los bordes de las tarjetas de los personajes-->
+    }
+
+    .number-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #007bff;
+      color: white;
+      padding: 5px;
+      border-radius: 0 0 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Contenedor principal -->
+    <div class="row justify-content-center my-5">
+      <div class="col-4">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button" onclick="showNextCharacter()">Mostrar siguiente personaje</button>
+          <button class="btn btn-light" type="button" onclick="clearList()">Limpiar lista</button>
+        </div>
+        <!-- Botones para mostrar el siguiente personaje o limpiar la lista. -->
+      </div>
+    </div>
+    <div class="row justify-content-center my-5">
+      <div class="col-12">
+        <div id="character-list-container" class="d-flex flex-wrap justify-content-around align-items-start">
+          <!-- Contenedor para mostrar la lista de personajes. -->
+          <!-- Los elementos de personajes se agregarán aquí dinámicamente. -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Cierre del contenedor principal. -->
+
+  <!-- Scripts necesarios para el funcionamiento, incluyendo Bootstrap JS. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script>
+    // Script de JavaScript para la funcionalidad de la página.
+  </script>
+</body>
+
+<script>
+  let currentIndex = 0;
+  let charactersData;
+
+  async function fetchCharacters() {
+    const response = await fetch('https://rickandmortyapi.com/api/character');
+    charactersData = await response.json();
+    // Función para obtener datos de la API de Rick and Morty.
+  }
+
+  async function showNextCharacter() {
+    if (!charactersData) {
+      await fetchCharacters();
+    }
+
+    const characterListContainer = document.getElementById('character-list-container');
+
+    if (currentIndex < charactersData.results.length) {
+      const character = charactersData.results[currentIndex];
+
+      const listItem = document.createElement('div');
+      listItem.classList.add('character-card', 'position-relative');
+
+      let statusColor = '#28a745'; // Verde por defecto (Vivo)
+      if (character.status === 'Dead') {
+        statusColor = '#dc3545'; // Rojo (Muerto)
+      } else if (character.status === 'unknown') {
+        statusColor = '#6c757d'; // Gris (Desconocido)
+      }
+
+      listItem.innerHTML = `
+        <div class="card">
+          <div class="number-badge" style="background-color: ${statusColor}">${currentIndex + 1}</div>
+          <img src="${character.image}" class="card-img-top" alt="Character Image">
+          <div class="card-body">
+            <h5 class="card-title">${character.name}</h5>
+            <p class="card-text">
+              <span class="fw-bold">Número:</span> ${currentIndex + 1}<br>
+              <span class="fw-bold">IdPersonaje:</span> ${character.id}<br>
+              <span class="fw-bold">Estado:</span> <span style="color: ${statusColor}">${character.status}</span><br>
+              <span class="fw-bold">Especie:</span> ${character.species}
+            </p>
+          </div>
+        </div>
+      `;
+
+      characterListContainer.appendChild(listItem);
+      currentIndex++;
+    } else {
+      alert('¡Has llegado al final de la lista de personajes!');
+    }
+  }
+
+  function clearList() {
+    currentIndex = 0;
+    const characterListContainer = document.getElementById('character-list-container');
+    characterListContainer.innerHTML = ''; // Limpiar la lista
+  }
+</script>
