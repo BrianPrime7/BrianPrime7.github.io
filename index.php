@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['userId'])) {
+    // Redireccionar al usuario a la página de inicio de sesión si no está autenticado
+    header('Location: index.html');
+    exit(); // Asegurar que el script se detenga después de redireccionar
+}
+
+// El usuario está autenticado, puedes acceder a $_SESSION['userId'] y otros datos de sesión aquí
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +27,7 @@
 		<input type="checkbox" name="" id="toggler">
 		<label for="toggler" class="fas fa-bars"></label>
 		
-		<a href="dispets.html" class="logo">Dispets<span>.</span></a>
+		<a href="dispets.php" class="logo">Dispets<span>.</span></a>
 
 		<nav class = "navbar">
 			<a href="#home">home</a>
@@ -25,8 +38,10 @@
 
 		<div class="icons">
 			<a href="#" class="fas fa-heart"></a>
-			<a class="fas fa-shopping-cart" id="cart-bt"></a>
-			<a href="index.html" class="fas fa-user"></a>
+			<a href="cart.php" class="fas fa-shopping-cart" id="cart-bt"></a>
+            <form action="logout.php" method="post">
+            <button type="submit" class="logout-button">Cerrar Sesión</button>
+            </form>
 		</div>
 
 	</header>
