@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response = array('message' => 'Todos los campos son obligatorios');
     } else {
         // Verificar las credenciales en la base de datos
-        $stmt = $conn->prepare("SELECT id, correo, clave, rol FROM usuarios WHERE correo = ?");
+        $stmt = $conn->prepare("SELECT id, correo, clave FROM usuarios WHERE correo = ?");
         $stmt->bind_param("s", $loginEmail);
         $stmt->execute();
-        $stmt->bind_result($userId, $userEmail, $hashedPassword, $userRole);
+        $stmt->bind_result($userId, $userEmail, $hashedPassword);
         $stmt->fetch();
         $stmt->close();
 
@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Iniciar sesión y guardar datos en variables de sesión
             $_SESSION['userId'] = $userId;
             $_SESSION['userEmail'] = $userEmail;
-            $_SESSION['userRole'] = $userRole; // Guardar el rol del usuario en la sesión
 
             $response = array('message' => 'Inicio de sesión exitoso');
         } else {
@@ -37,4 +36,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $conn->close();
 ?>
-
